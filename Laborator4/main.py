@@ -102,13 +102,6 @@ def ex_5(target: str, to_search: str) -> List[str]:
         raise ValueError("Target needs to be file/directory")
 
 
-def error_callback(exception: Exception):
-    """
-    prints exception
-    """
-    print(exception)
-
-
 def ex_6(target: str, to_search: str, callback: Callable):
     try:
         # folosesc functia scrisa la exercitiul 5
