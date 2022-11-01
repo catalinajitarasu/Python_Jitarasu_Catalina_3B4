@@ -102,13 +102,39 @@ def ex_5(target: str, to_search: str) -> List[str]:
         raise ValueError("Target needs to be file/directory")
 
 
-def ex_6(target: str, to_search: str, callback: Callable):
+def ex_6_1(target: str, to_search: str, callback: Callable):
     try:
         # folosesc functia scrisa la exercitiul 5
         return ex_5(target, to_search)
     except Exception as e:
         callback(e)
         return []
+
+
+def ex_6_2(target: str, to_search: str, callback: Callable):
+    # aici am luat tot codulul de la ex_5 doar ca am adaugat exceptiile
+    # ca sa pot sa apelez pentru toate erorile functia callback
+    if os.path.isfile(target):
+        try:
+            if file_contains_to_search(target, to_search):
+                return [target]
+        except Exception as e:
+            callback(e)
+    try:
+        if not os.path.isdir(target):
+            raise ValueError("Target needs to be file/directory")
+        to_return = []
+        for root, directories, files in os.walk(target):
+            for f in files:
+                name = os.path.join(root, f)
+                try:
+                    if file_contains_to_search(name, to_search):
+                        to_return += [name]
+                except Exception as e:
+                    callback(e)
+        return to_return
+    except Exception as e:
+        callback(e)
 
 
 def ex_7(file_path: str) -> dict:
