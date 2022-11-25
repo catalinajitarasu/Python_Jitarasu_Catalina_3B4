@@ -18,12 +18,13 @@ def ex_2(regex: re, text: str, x: int) -> List:
     return list_substring
 
 
-def ex_3(text: str, list_regex) -> List[str]:
+def ex_3(list_string, list_regex) -> List[str]:
     result = []
     for regex in list_regex:
-        match = re.findall(regex, text)
-        for i in range(0, len(match)):
-            result.append(match[i])
+        for string in list_string:
+            match = re.findall(regex, string)
+            for i in range(0, len(match)):
+                result.append(match[i])
     return list(set(result))
 
 
@@ -90,7 +91,7 @@ def ex_8(path_dir, regex):
 if __name__ == '__main__':
     print(ex_1("Python2aa bb45 21a 21*"))
     print(ex_2(r"\d+", "Color from pixel 20,30 is 123", 2))
-    print(ex_3("Python2aa bb45 21a 21 56/ ", [r"\d+", r"[a-zA-Z0-9]+"]))
+    print(ex_3(["Python34", "23", "ana34", "20*"], [r"\d+", r"[a-zA-Z0-9]+"]))
     print(ex_4("E:/pythonProject1/Laborator/file.xml", {"class": "url", "name": "url-form", "data-id": "item"}))
     print(ex_5("E:/pythonProject1/Laborator/file.xml", {"class": "url", "name": "url-form", "data-id": "item"}))
     print(ex_6("Anastasia are mere"))
